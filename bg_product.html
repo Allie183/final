@@ -1,0 +1,205 @@
+<%@page contentType="text/html;charset=utf-8" language="java" import="java.sql.*"%>
+<%@include file="back/config.html" %>
+<%  request.setCharacterEncoding("UTF-8")  ;%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bg.css">
+    <link rel="stylesheet" href="css/h.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!--英文字體-->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>bg</title>
+</head>
+<body>
+    <div id="id_wrapper">
+    <!-- 導覽列 -->
+    <div id="id_header">
+    <header>
+        <nav>
+            <ul class="nav_center">
+                <li><a href="index.html"><img class="logo" src="img/logo.png"></a></li>
+                <li><a href="bg_product.html">商品管理</a></li>
+                <li><a href="bg_order.html">訂單管理</a></li>
+                <li><a href="bg_comment.html">留言板管理</a></li>
+				<form action="back/logout.html" method="post">
+					<input type="submit" class="w3-bar-item w3-button" value="登出"></input>
+				</form>
+	<%
+		//判斷是否管理者登入
+		sql = "SELECT * FROM `manager` WHERE `account`='"+session.getAttribute("id")+"'";
+        ResultSet rs =  con.createStatement().executeQuery(sql);  
+		if(rs.next() ){
+	%>    
+        
+    
+    <%
+      }else{
+		  response.sendRedirect("index.html");
+		  }
+    %>
+            </ul>
+        </nav>
+    </header>
+    </div>
+    <script src="js/h.js"></script>
+    <!-- 導覽列結束 -->
+    <div id="id_content">
+	<div class="pd">
+        <button class="tablink" onclick="openPage('add', this, 'gray')" id="defaultOpen">新增商品</button>
+        <button class="tablink" onclick="openPage('alter', this, 'gray')" >修改商品</button>
+        <button class="tablink" onclick="openPage('delete', this, 'gray')">刪除商品</button>
+        <button class="tablink" onclick="openPage('all', this, 'gray')">商品總覽</button>
+
+        <div id="add" class="tabcontent">
+           <form action="back/bg_addpd.html">
+            商品編號: <input type="text" name="number" required="required"><br>
+			商品品牌: <input type="text" name="brand" required="required"><br>
+            商品名稱: <input type="text" name="name" required="required"><br>
+			商品價格: <input type="text" name="price" required="required"><br>
+			照片1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="pic1" required="required"><br>
+			照片2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="pic2" required="required"><br>
+			照片3:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="pic3" required="required"><br>
+            商品特色: <input type="text" name="introduction" required="required"><br>
+			商品庫存: <input type="text" name="reserve" required="required"><br>
+            感光度:&nbsp;&nbsp;&nbsp;&nbsp;   <input type="text" name="sensitivity" required="required"><br>
+            鏡頭焦距: <input type="text" name="focallength" required="required"><br>
+            快門速度: <input type="text" name="shutter" required="required"><br>
+            光圈大小: <input type="text" name="size" required="required"><br>
+            對焦距離: <input type="text" name="distance" required="required"><br>
+			尺寸:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="mm" required="required"><br>
+            重量:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="weight" required="required"><br>
+			類別:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="sort" required="required"><br>
+            
+               <input type="submit" value="新增" style="width: 80px;margin-left: 100px;">
+           </form>
+        </div>
+
+        <div id="alter" class="tabcontent">
+				 
+		    <form action="back/bg_updatepd.html">
+
+                商品編號: <input type="text" name="revise" placeholder="" >
+                <input type="submit" value="選擇" style="width: 80px;margin-left: 100px;">
+				
+            </form>
+			
+        </div>
+
+        <div id="delete" class="tabcontent">
+            <form action="back/bg_deletepd.html">
+                商品編號: <input type="text" name="number" id="">
+                <a href=""><input type="submit" value="刪除" style="width: 80px;margin-left: 100px;"></a>
+            </form>
+        </div>
+		
+                            
+							
+
+        <div id="all" class="tabcontent">
+            <div class="allpo">
+			<%  
+    
+          try {
+//Step 1: 載入資料庫驅動程式 
+            Class.forName("com.mysql.jdbc.Driver");   
+            try {
+//Step 2: 建立連線 
+           if(con.isClosed())
+                    out.println("連線建立失敗");
+                else
+                    { 
+//Step 3: 選擇資料庫 
+                    con.createStatement().execute("USE `final`");
+					request.setCharacterEncoding("UTF-8");
+//Step 4: 執行 SQL 指令 
+                    String sqll = "SELECT `number`,`brand`,`name`,`price`,`introduction`,`reserve`,`sensitivity`,`focallength`,`shutter`,`size`,`distance`,`mm`,`weight` ,`sort` FROM `product`" ;
+                    ResultSet all =  con.createStatement().executeQuery(sqll);
+//Step 5: 顯示結果 
+                          
+        //一筆一筆讀取資料，如果回傳false,表示資料讀取完畢。
+        //用回圈印出結果，getString(1)表示id,getString(2)表示name,依此類推
+		            while(all.next()){
+                        for(int i=1; i<2; i++){ 
+%>
+                <div>
+				    商品編號：<%=all.getString(1)%><br>
+					商品品牌：<%=all.getString(2)%><br>
+                    商品名稱：<%=all.getString(3)%><br>
+                    商品價錢：<%=all.getString(4)%><br>
+					商品特色：<%=all.getString(5)%><br>
+                    商品庫存：<%=all.getString(6)%><br>
+                    感光度：  <%=all.getString(7)%><br>
+                    鏡頭焦距：<%=all.getString(8)%><br>
+                    快門速度：<%=all.getString(9)%><br>
+                    光圈大小：<%=all.getString(10)%><br>
+                    對焦距離：<%=all.getString(11)%><br>
+                    尺寸：<%=all.getString(12)%><br>
+                    重量：<%=all.getString(13)%><br>
+					類別：<%=all.getString(14)%><br>
+                    -------------------------------------------------------------<br>
+                </div>
+				<%
+                        }
+                        
+      //每次印完一次資料，就印分隔線區隔。
+                     } 
+//Step 6: 關閉連線          
+                    con.close();
+                    }
+                }  
+            catch (SQLException sExec) {
+                    out.println("SQL錯誤"+sExec.toString());
+                }
+              }
+        
+            catch (ClassNotFoundException err) {
+                out.println("class錯誤"+err.toString());
+            }
+            
+          %>
+            </div>
+        </div>
+		
+    </div>
+    </div>
+    <script>
+    function openPage(pageName, elmnt, color) {
+        // Hide all elements with class="tabcontent" by default */
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        }
+    
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+        }
+    
+        // Show the specific tab content
+        document.getElementById(pageName).style.display = "block";
+    
+        // Add the specific color to the button used to open the tab content
+        elmnt.style.backgroundColor = color;
+    }
+    
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
+
+    
+    <footer  id="id_footer">
+        <div class="foot">
+            <p>Copyright © 2021 Chung Yuan Christian University All Rights</p>
+        </div>
+    </footer>
+    </div>
+    
+
+</body>
+</html>

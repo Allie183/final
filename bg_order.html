@@ -1,0 +1,191 @@
+<%@page contentType="text/html;charset=utf-8" language="java" import="java.sql.*"%>
+<%@include file="back/config.html" %>
+<%  request.setCharacterEncoding("UTF-8")  ;%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bg.css">
+    <link rel="stylesheet" href="css/h.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!--英文字體-->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>bg</title>
+</head>
+<body>
+    <div id="id_wrapper">
+    <!-- 導覽列 -->
+    <div id="id_header">
+        <header>
+            <nav>
+                <ul class="nav_center">
+                    <li><a href="index.html"><img class="logo" src="img/logo.png"></a></li>
+                    <li><a href="bg_product.html">商品管理</a></li>
+                    <li><a href="bg_order.html">訂單管理</a></li>
+                    <li><a href="bg_comment.html">留言板管理</a></li>
+					<form action="back/logout.html" method="post">
+					    <input type="submit" class="w3-bar-item w3-button" value="登出"></input>
+				    </form>
+				<%
+		//判斷是否管理者登入
+		sql = "SELECT * FROM `manager` WHERE `account`='"+session.getAttribute("id")+"'";
+        ResultSet rs =  con.createStatement().executeQuery(sql);  
+		if(rs.next() ){
+	%>    
+        
+    
+    <%
+      }else{
+		  response.sendRedirect("index.html");
+		  }
+    %>
+                
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <script src="js/h.js"></script>
+    <!-- 導覽列結束 -->
+    <div id="id_content">
+        <div class="pd2">
+            <button class="tablink2" onclick="openPage('notyet', this, 'gray')">未出貨</button>
+            <button class="tablink2" onclick="openPage('done', this, 'gray')" id="defaultOpen">已完成</button>
+           
+    
+            <div id="notyet" class="tabcontent2">
+			<%  
+    
+          try {
+//Step 1: 載入資料庫驅動程式 
+            Class.forName("com.mysql.jdbc.Driver");   
+            try {
+//Step 2: 建立連線 
+           if(con.isClosed())
+                    out.println("連線建立失敗");
+                else
+                    { 
+//Step 3: 選擇資料庫 
+                    con.createStatement().execute("USE `final`");
+					request.setCharacterEncoding("UTF-8");
+//Step 4: 執行 SQL 指令 
+                    String q = request.getParameter("q");
+                    String sqll = "SELECT `id`,`name`,`tel`,`email`,`add`,`ship`,`pay`, `content`, `date` FROM `order`" ;
+                    ResultSet ord =  con.createStatement().executeQuery(sqll); 
+					String qq = "SELECT `id`,`name`,`tel`,`email`,`add`,`ship`,`pay`, `content`, `date` FROM `complete`" ;
+                    ResultSet com =  con.createStatement().executeQuery(qq);
+
+//Step 5: 顯示結果 
+                          
+        //一筆一筆讀取資料，如果回傳false,表示資料讀取完畢。
+        //用回圈印出結果，getString(1)表示id,getString(2)表示name,依此類推
+		            while(ord.next()){
+                        for(int i=1; i<2; i++){ 
+%>
+<right>
+			<form action="back/complete.html">
+                <div>
+                    訂單編號 :&nbsp;&nbsp;&nbsp;&nbsp; <input style="width: 400px;" type="text" name="id" value="<%=ord.getString(1)%>" readonly/><br>
+                    購買人姓名 :&nbsp;<input style="width: 400px;" type="text" name="name" value="<%=ord.getString(2)%>" readonly/><br>
+                    電話：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input style="width: 400px;" type="text" name="tel" value="<%=ord.getString(3)%>" readonly/><br>
+                    Email：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     <input style="width: 400px;" type="text" name="email" value="<%=ord.getString(4)%>" readonly/><br>
+                    運送地點：  &nbsp;&nbsp;<input style="width: 400px;" type="text" name="add" value="<%=ord.getString(5)%>" readonly/><br>
+					寄送方式: &nbsp;&nbsp;&nbsp;&nbsp;  <input style="width: 400px;" type="text" name="s" value="<%=ord.getString(6)%>" readonly/><br>
+					付款方式:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <input style="width: 400px;" type="text" name="p" value="<%=ord.getString(7)%>" readonly/><br>
+                    備註：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <input style="width: 400px;" type="text" name="content" value="<%=ord.getString(8)%>" readonly/><br>
+                    訂購商品：<br>
+                    訂購數量：<br>
+                    訂單日期：<%=ord.getString(9)%><br>
+                    <input style="width: 100px;" type="submit" value="已出貨"><br>
+                    ----------------------------------------------------------------------------------- <br>
+                </div>
+			</form>
+</right>
+			<%
+                        }
+                        
+      //每次印完一次資料，就印分隔線區隔。
+                     } %>
+					 
+
+            </div>
+		
+    
+            <div id="done" class="tabcontent2">
+			<%  
+                   
+
+		            while(com.next()){
+                        for(int i=1; i<2; i++){ 
+%>
+                <div>
+                    訂單編號 : <%=com.getString(1)%><br>
+                    購買人姓名 :<%=com.getString(2)%><br>
+                    電話：<%=com.getString(3)%><br>
+                    Email：<%=com.getString(4)%><br>
+                    運送地點：<%=com.getString(5)%><br>
+                    備註：<%=com.getString(6)%><br>
+                    訂購商品：<br>
+                    訂購數量：<br>
+                    出貨日期：<%=com.getString(7)%><br>
+                    ----------------------------------------------------------------------------------- <br>
+                </div>
+				<%					 }
+					}
+//Step 6: 關閉連線          
+                    con.close();
+                    }
+                }  
+            catch (SQLException sExec) {
+                    out.println("SQL錯誤"+sExec.toString());
+                }
+              }
+        
+            catch (ClassNotFoundException err) {
+                out.println("class錯誤"+err.toString());
+            }
+            
+          %>
+            </div>
+					
+        </div>
+        <script>
+        function openPage(pageName, elmnt, color) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent2");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            }
+        
+            // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink2");
+            for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+            }
+        
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+        
+            // Add the specific color to the button used to open the tab content
+            elmnt.style.backgroundColor = color;
+        }
+        
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+        </script>
+    
+    </div>
+    
+    
+    <footer  id="id_footer">
+        <div class="foot">
+            <p>Copyright © 2021 Chung Yuan Christian University All Rights</p>
+        </div>
+    </footer>
+    </div>
+    
+    
+</body>
+</html>

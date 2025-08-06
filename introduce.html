@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/intro.css">
+    <link rel="stylesheet" href="css/h.css">    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!--英文字體-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>映像販賣所 | 商品詳情</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+</head>
+<body>
+    <!-- 導覽列 -->
+    <header>
+        <nav>
+            <ul class="nav_center">
+                <li><a href="info.html">品牌理念</a></li>
+                <li><a href="about.html">關於我們</a></li>
+                <li><a href="index.html"><img class="logo" src="img/logo.png"></a></li>
+                <li>
+                    <div class="dropdown">
+                        <a href="shop.html">商品瀏覽</a>
+                        <div class="dropdown-content">
+                            <a href="sort1.html">底片相機</a>
+                            <a href="sort3.html">拍立得</a>
+                            <a href="sort2.html">即可拍</a>
+                            <a href="sort4.html">底片</a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="member.html" class="nav_member">會員資訊</a></li>
+
+                <!-- 登入註冊 -->
+				
+        <div class="nav_right">
+                    <button onclick="document.getElementById('id01').style.display='block'"><img class="sign_logo" src="img/sign.png" ></button>            
+                    <div id="id01" class="modal">
+                        <div class="container" id="container">
+                            <div class="form-container sign-up-container">
+                                <form action="back/memberadd.html">
+                                    <h1>創立帳戶</h1>
+                                    <input type="text" placeholder="Account" name="account" required="required"/>
+                                    <input type="email" placeholder="Email" name="email" required="required"/>
+                                    <input type="password" placeholder="Password" name="password" required="required"/>
+                                    <button>註冊</button>
+                                </form>
+                            </div>
+                            <div class="form-container sign-in-container">
+                                <form action="back/login.html">
+                                    <h1>登入</h1>
+                                    <input type="text" placeholder="Account" name="username" required="required"/>
+                                    <input type="password" placeholder="Password" name="password" required="required"/>
+                                    <button>登入</button>
+                                </form>
+                            </div>
+                            <div class="overlay-container">
+                                <div class="overlay">
+                                    <div class="overlay-panel overlay-left">
+                                        <h1>已註冊過</h1>
+                                        <p>點擊以登入</p>
+                                        <button class="ghost" id="signIn">登入</button>
+                                    </div>
+                                    <div class="overlay-panel overlay-right">
+                                        <h1>尚未註冊</h1>
+                                        <p>創建新帳戶</p>
+                                        <button class="ghost" id="signUp">註冊</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <form action="search.html">
+                        <div class="search-box">
+                            <input type="text"  class="search-txt" placeholder="search..." required="required"/>
+                            <button type="submit" class="search-btn">
+                                <img src="img/search.png" >
+                                <!-- <i class="fa fa-search"></i> -->
+                            </button>
+                        </div> 
+                    </form>
+                </div>
+    
+
+	  <div class="nav_right">
+                    <form action="back/logout.html" method="post">
+					<input type="submit" class="w3-bar-item w3-button" value="登出"></input>
+					</form>            
+                  
+                    <!-- 購物車 -->
+                    <div id="cart">
+                        <button class="openbtn" onclick="openNav()"><img class="cart_logo" src="img/cart.png" ></button>
+                    </div>
+                    <div id="mySidebar" class="sidebar">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <div class="sidebarinner">
+                            <form action="checkout.html">
+                                <div class="cart-p">
+                                    <img src="img/c5.png">
+                                    <div>
+                                        <div class="cp1">   <!--商品名稱-->
+                                            <h1>KONICA</h1>
+                                            <p>Genba Kantoku</p>
+                                        </div>
+                                        <div class="cp2">   <!-- 數量增減 -->
+                                            <input id="min" type="button" value="&minus;"/>
+                                            <input id="quantity" type="text" value="1"/>
+                                            <input id="add" type="button" value="+"/> <!-- ' &minus; '是減號 -->
+                                        </div>
+                                    </div>
+                                    <div class="cp3">   <!-- 商品價格 -->
+                                        <p>$4580</p>
+                                    </div>
+                                    <button>&times;</button>    <!-- 刪除商品按鈕 '&times;'是叉叉符號 -->
+                                </div>
+                                <div class="cart-p">
+                                    <img src="img/c1.png">
+                                    <div>
+                                        <div class="cp1">   <!--商品名稱-->
+                                            <h1>CANON</h1>
+                                            <p>New Canonet 28</p>
+                                        </div>
+                                        <div class="cp2">   <!-- 數量增減 -->
+                                            <input id="min" type="button" value="&minus;"/>
+                                            <input id="quantity" type="text" value="1"/>
+                                            <input id="add" type="button" value="+"/> <!-- ' &minus; '是減號 -->
+                                        </div>
+                                    </div>
+                                    <div class="cp3">   <!-- 商品價格 -->
+                                        <p>$4580</p>
+                                    </div>
+                                    <button>&times;</button>    <!-- 刪除商品按鈕 '&times;'是叉叉符號 -->
+                                </div>
+                                
+                                <!-- 計算總價 -->
+                                <div class="cart-total">
+                                    <p>SUBTOTAL<p>
+                                    <p class="r">$6000</p>
+                                </div>
+                                <div class="cart-but">
+                                    <input type="button" value="BACK TO SHOP" onclick="location.href='shop.html'">
+                                    <input type="submit" value="CHECKOUT" class="p-check">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <form action="search.html">
+                        <div class="search-box">
+                            <input type="text"  class="search-txt" placeholder="search..." required="required"/>
+                            <button type="submit" class="search-btn">
+                                <img src="img/search.png" >
+                                <!-- <i class="fa fa-search"></i> -->
+                            </button>
+                        </div> 
+                    </form>
+                </div>
+      
+            </ul>
+        </nav>
+    </header>
+    <script src="js/h.js"></script>
+    <!-- 導覽列結束 -->
+
+    <!-- 商品資訊 -->
+	
+    <section id="sec-1">
+        <div class="intro-back">
+            <div class="intro-sec1">
+                <div class="slider">
+                    <div class="slides">
+                        <!-- 商品幻燈片按鈕 -->
+                        <input type="radio" name="radio-btn" id="radio1" checked>
+                        <input type="radio" name="radio-btn" id="radio2">
+                        <input type="radio" name="radio-btn" id="radio3">
+                        <!-- 商品照片 -->
+                        <div class="slide first">
+                            <img src="img/e2.png" alt="">
+                        </div>
+                        <div class="slide">
+                            <img src="img/e2-2.png" alt="">
+                        </div>
+                        <div class="slide">
+                            <img src="img/e2-3.png" alt="">
+                        </div>
+                    </div>                 
+                    <!-- 商品幻燈片按鈕 -->
+                    <div class="navigation-manual">
+                        <label for="radio1" class="manual-btn"></label>
+                        <label for="radio2" class="manual-btn"></label>
+                        <label for="radio3" class="manual-btn"></label>
+                    </div>
+                </div>
+                <!-- 商品資訊 -->
+				 
+                <div class="intro-main1">
+				
+                    <form action="checkout.html?p=<%=rs1.getString(1)%>">
+                        <div class="p-name">
+                            <h1><%=rs1.getString("brand")%></h1>
+                            <h2><%=rs1.getString("name")%></h2>
+                        </div>
+                        <p class="p-price">NT:<%=rs1.getString(5)%></p>
+                        <p class="p-invent">庫存數量 : <%=rs1.getString(10)%> </p>
+                        <div class="p-flex">
+                            <div class="p-qt">
+                                <input id="imin" type="button" value="&minus;"/>
+                                <input id="iquantity" type="text" value="1" name="quantity"/>
+                                <input id="iadd" type="button" value="+"/>
+                            </div>
+							<form action="">
+                                 <button type="submit" class="add" >ADD TO CART</button>  
+						    </form>
+                            
+                            <button  class="fav" >&#9825;</button>     <!-- &#9825;是愛心圖案-->
+                        </div>  
+						
+						<form action="checkout.html?p=<%=rs1.getString(1)%>">
+                            <button type="submit" class="buy">BUY IT NOW</button><br>
+						</form>
+						
+                    </form>
+					
+                    <script>
+                        $(function(){
+                            var t = $("#iquantity");
+                            $("#iadd").click(function(){
+                                t.val(parseInt(t.val())+1);
+                                $("#imin").removeAttr("disabled");//當按加1時，解除$("#min")不可讀狀態
+                                setTotal();
+                            })
+                            $("#imin").click(function(){
+                                    if (parseInt(t.val())>1) {        //判斷數量值大於1時才可以減少
+                                        t.val(parseInt(t.val())-1)
+                                        }else{
+                                        $("#imin").attr("disabled","disabled") //當$("#min")為1時，$("#min")不可讀狀態
+                                    }
+                                setTotal();
+                            })
+                            function setTotal(){
+                                $("#total").html((parseInt(t.val())*3.95).toFixed(2));
+                            }
+                            setTotal();
+                        })
+                    </script>
+
+
+                    <div class="p-tab">
+                        <button class="tablinks" onclick="openCity(event, 'info')" id="defaultOpen">產品特色</button>
+                        <button class="tablinks" onclick="openCity(event, 'tech')">技術規格</button>
+                    </div>
+                    <div id="info" class="tabcontent">
+                        <p>
+                        </p>
+                    </div>
+                    <div id="tech" class="tabcontent">
+                        <p>感光度：<%=rs1.getString("sensitivity")%></p>
+                        <p>鏡頭焦距：<%=rs1.getString("focallength")%></p>
+                        <p>快門速度：<%=rs1.getString("shutter")%></p>
+                        <p>光圈大小：<%=rs1.getString("size")%></p> 
+                        <p>對焦距離：<%=rs1.getString("distance")%></p>  
+                        <p>尺寸：<%=rs1.getString("mm")%></p>
+                        <p>重量：<%=rs1.getString("weight")%></p>
+                    </div>
+
+                    <!-- 商品描述框 -->
+                    <script>
+                        function openCity(evt, cityName) {
+                        var i, tabcontent, tablinks;
+                        tabcontent = document.getElementsByClassName("tabcontent");
+                        for (i = 0; i < tabcontent.length; i++) {
+                            tabcontent[i].style.display = "none";
+                        }
+                        tablinks = document.getElementsByClassName("tablinks");
+                        for (i = 0; i < tablinks.length; i++) {
+                            tablinks[i].className = tablinks[i].className.replace(" active", "");
+                        }
+                        document.getElementById(cityName).style.display = "block";
+                        evt.currentTarget.className += " active";
+                        }
+                        document.getElementById("defaultOpen").click();   /*預設被按下*/
+                    </script>
+				
+                </div>
+				
+            </div> 
+        </div>
+    </section>
+    
+
+    <section id="sec1-2">
+        <form action="">
+            <h1>RECOMMEND</h1>
+            <div class="p-recomm">
+                <div class="prod">
+                    <a href="#" title=""><img src="img/f3.png" alt=""></a>
+                    <h2>KODAK</h2>
+                    <p>Tri-X 400</p>
+                    <button type="submit">ADD TO CART</button>  
+                </div>
+                <div class="prod">
+                    <a href="#" title=""><img src="img/f4.png" alt=""></a>
+                    <h2>FUJIPAN</h2>
+                    <p>Neopan 400</p>
+                    <button type="submit">ADD TO CART</button>  
+                </div>
+                <div class="prod">
+                    <a href="#" title=""><img src="img/f5.png" alt=""></a>
+                    <h2>ADOX</h2>
+                    <p>Scala 160</p>
+                    <button type="submit">ADD TO CART</button>  
+                </div>
+            </div>
+        </form>
+    </section>
+    
+    <section id="sec-2">
+        <div class="intro-back2">
+            <!-- <div class="detail2"> -->
+                <div class="p-comment">
+                    <h1>COMMENT</h1>
+                        <form action="back/add.html">
+                            <input id="name" type="text" name="name" placeholder="Name" required="required"><br>
+                            <p>Comment</p><textarea id="content" name="content"  required="required"></textarea>
+                            <div class="rating" >
+                                <input type="radio" name="star" id="star1" value="★★★★★" required="required"><label for="star1"></label>
+                                <input type="radio" name="star" id="star2" value="★★★★"><label for="star2"></label>
+                                <input type="radio" name="star" id="star3" value="★★★"><label for="star3"></label>
+                                <input type="radio" name="star" id="star4" value="★★"><label for="star4"></label>
+                                <input type="radio" name="star" id="star5" value="★"><label for="star5"></label>
+                            </div>
+							
+                        </form>
+                </div>
+				<div class="p-review">
+				
+                    <h1>REVIEW</h1>
+
+
+                        <div class="viewbox">
+                            <img src="img/cameraicon.png" class="viewicon"> <span class="v-name"><% out.println(rs.getString(2)); %></span> <span class="v-star"><% out.println(rs.getString(5)); %></span><br>
+                            <div class="v-txt"><p><% out.println(rs.getString(3)); %></p><p><% out.println(rs.getString(4)); %></p></div>
+                        </div>
+             		 
+
+                </div>	   
+              <!-- </div> -->
+        </div>
+    </section>
+    <a href="#sec-1">
+        <div class="scroll-up" ></div>
+    </a>
+    <footer>
+        <div class="foot">
+            <p>Copyright © 2020 Chung Yuan Christian University All Rights</p>
+			
+			<p>網站瀏覽人數: </p>
+        </div>
+    </footer>
+
+</body>
+</html>
