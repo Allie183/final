@@ -1,0 +1,196 @@
+
+html, body {
+  /* 設定body高度為100% 拉到視窗可視的大小 */
+  height: 100%;
+}
+
+#id_wrapper {
+  /* 設定高度最小為100%, 如果內容區塊很多, 可以長大 */
+  min-height: 100%;
+  /* 位置設為relative, 作為footer區塊位置的參考 */
+  position: relative;
+}
+
+#id_header {
+  /* 設定header的高度 */
+  box-sizing: border-box;
+}
+
+#id_content {
+  /* 留出header及footer區塊的空間 */
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+#id_footer {
+  box-sizing: border-box;
+  /* 設定footer絕對位置在底部 */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+/*商品管理*/
+.pd{
+  position:relative;
+  top: 100px;
+  left: 50%;
+  margin-bottom: 200px;
+  margin-left:-600px;
+  width: 1200px;
+  height: max-content;
+}
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: black;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+#add form{
+  position: relative;
+  left: 36%;
+  width: 400px;
+}
+#add input{
+  margin-top: 30px;
+  height: 35px;
+  width: 200px;
+  border-radius: 5px;
+}
+#alter form{
+  position: relative;
+  left: 36%;
+  width: 400px;
+}
+#alter input{
+  margin-top: 30px;
+  height: 35px;
+  width: 200px;
+  border-radius: 5px;
+}
+#delete form{
+  position: relative;
+  left: 36%;
+  width: 400px;
+}
+#delete input{
+  margin-top: 30px;
+  height: 35px;
+  width: 200px;
+  border-radius: 5px;
+}
+.allpo{
+  position: relative;
+  left: 34%;
+  font-size: 20px;
+  width: 500px;
+}
+.allpo div{
+  line-height: 30px;
+}
+
+#add ,#alter, #delete ,#all  {background-color:gainsboro;}
+
+/*訂單管理*/
+
+
+.pd2{
+  position:relative;
+  top: 100px;
+  left: 50%;
+  margin-bottom: 200px;
+  margin-left:-600px;
+  width: 1200px;
+  height: max-content;
+}
+.tablink2 {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 50%;
+}
+
+.tablink2:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent2 {
+  color: black;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+.tabcontent2 div{
+  font-size: 20px;
+  line-height: 28px;
+  position: relative;
+  left: 50%;
+  margin-left: -260px;
+  width: 600px;
+}
+.tabcontent2 input{
+  width: 60px;
+  height: 30px;
+}
+#notyet,#done{background-color:gainsboro;}
+
+.cpo{
+  position: relative;
+  top: 70px;
+  background-color: gainsboro;
+  margin-bottom: 130px;
+}
+.cpo div{
+  position: relative;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  left: 50%;
+  margin-left: -255px;
+  font-size: 23px;
+  line-height: 30px;
+  width: 700px;
+}
+.cpo input{
+  width: 50px;
+  height: 30px;
+}
+
+.foot{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(243, 243, 243);
+    text-align: center;
+    align-items: center;          /*置中*/
+    justify-content: center;      /*置中*/
+    padding: 35px;
+  }
+  .foot p{
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
